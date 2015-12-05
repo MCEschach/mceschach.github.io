@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Template &middot; Bootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+    <style type="text/css">
+      @font-face {
+        font-family: 'Sherwood';
+        src: url('sherwood.ttf');
+      }
+
+      body { 
+        background: url(pic/christmasparty.jpg) no-repeat center center fixed; 
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+
+        padding-top: 20px;
+        padding-bottom: 40px;
+      }
+
+      /* Custom container */
+      .container-narrow {
+        margin: 0 auto;
+        max-width: 700px;
+      }
+      .container-narrow > hr {
+
+        margin: 30px 0;
+      }
+
+      /* Main marketing message and sign up button */
+      .jumbotron {
+        border-radius: 25px;
+        padding: 20px;
+        background-color:  #efefef;
+        margin: 60px 0px;
+        text-align: center;
+      }
+      .jumbotron h1 {
+        font-family: 'Sherwood';
+        font-size: 72px;
+        line-height: 1;
+      }
+      .jumbotron .btn {
+        font-size: 25px;
+        padding: 14px 24px;
+      }
+
+      /* Supporting marketing content */
+      .marketing {
+        margin: 60px 0;
+      }
+      .marketing p + h4 {
+        margin-top: 28px;
+      }
+
+      .span12{
+        margin-left: 0px;
+        border-radius: 10px;
+        padding: 10px;
+        background-color: #efefef;
+      }
+      #map {
+        height: 480px;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="bootstrap/js/html5shiv.js"></script>
+    <![endif]-->
+
+  </head>
+
+  <body>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Christmasparty</a>
+    </div>
+    <ul class="nav navbar-nav">
+    <li><a href="#Datum">Datum</a></li>
+    <li><a href="#Ort">Ort</a></li>
+    <li><a href="#Bands">Bands</a></li>
+    </ul>
+  </div>
+</nav>
+
+    <div class="container-narrow">
+
+      <div class="jumbotron">
+        <h1>MC Eschach Christmasparty</h1>
+      </div>
+
+      <!--<hr>-->
+      <div class="row-fluid marketing">
+        <div class="span12">
+        <p>
+          Zuerst die Terroranschläge in Paris, jetzt noch die Christmasparty in
+          Straßdorf. Wie viel Angst und Schrecken kann Europa noch aushalten?
+          Die Kirche ist machtlos, der 1.FC Eschach immer noch in der Kreisliga B.
+          Nur ein kleiner elitärer Geheimbund überwindet seine Angststarre und
+          beginnt zu handeln.
+          </p>
+          <p>
+          Für alle die Zuflucht vor menschenunwürdigen Zuständen, schlechter Musik
+          und wässrigem Jackie Cola suchen bietet der MC Eschach eine alternative
+          zur Christmasparty am 18.12.2015.
+          </p>
+          <p>
+          "fight for your right to party", GG §20 Abs. 4
+          </p>
+        </div>
+      </div>
+
+      <div id="Datum" class="row-fluid marketing">
+        <div class="span12">
+          <h4>Datum</h4>
+          <p>19.12.2015</p>
+        </div>
+      </div>
+
+      <div class="row-fluid marketing">
+        <div class="span12">
+          <img src="pic/nebelmaschine680.jpg" alt="Wiaschde Pardibeleuchtung">
+        </div>
+      </div>
+
+      <div id="Ort" class="row-fluid marketing">
+        <div class="span12">
+          <h4>Ort</h4>
+          <p>73569 "Stadelmeier Country" Batschenhof, 4</p>
+          <div id="map" style="float: left;"></div>
+        </div>
+      </div>
+
+      <div id="Bands" class="row-fluid marketing">
+        <div class="span12">
+          <h4>Bands</h4>
+          <p>Safe the Thunderbox</p>
+        </div>
+      </div>
+
+      <div class="row-fluid marketing">
+        <div class="span12">
+          <iframe width="680" height="510" src="https://www.youtube.com/embed/lcXCZKWoUGA" frameborder="0" allowfullscreen></iframe>
+
+        </div>         
+      </div>
+      
+
+
+        <!-- bring in the google maps library -->
+        <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+ 
+        <script type="text/javascript">
+            //Google maps API initialisation
+            var element = document.getElementById("map");
+            var batschenhof4 = {lat: 48.90362, lng: 9.86967};
+            var map = new google.maps.Map(element, {
+                center: new google.maps.LatLng(batschenhof4),
+                zoom: 17,
+                mapTypeId: "OSM",
+                mapTypeControl: false,
+                streetViewControl: false
+            });
+
+            var marker = new google.maps.Marker({
+              position: batschenhof4,
+              map: map,
+              title: 'Pardy Hardy!'
+            });
+
+ 
+            //Define OSM map type pointing at the OpenStreetMap tile server
+            map.mapTypes.set("OSM", new google.maps.ImageMapType({
+                getTileUrl: function(coord, zoom) {
+                    // "Wrap" x (logitude) at 180th meridian properly
+                    // NB: Don't touch coord.x because coord param is by reference, and changing its x property breakes something in Google's lib 
+                    var tilesPerGlobe = 1 << zoom;
+                    var x = coord.x % tilesPerGlobe;
+                    if (x < 0) {
+                        x = tilesPerGlobe+x;
+                    }
+                    // Wrap y (latitude) in a like manner if you want to enable vertical infinite scroll
+ 
+                    return "http://tile.openstreetmap.org/" + zoom + "/" + x + "/" + coord.y + ".png";
+                },
+                tileSize: new google.maps.Size(256, 256),
+                name: "OpenStreetMap",
+                maxZoom: 19
+            }));
+        </script>
+
+    </div>
+  </body>
+</html>
